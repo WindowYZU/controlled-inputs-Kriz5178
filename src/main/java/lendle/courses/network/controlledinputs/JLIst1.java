@@ -6,10 +6,14 @@
 package lendle.courses.network.controlledinputs;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListCellRenderer;
 import javax.swing.WindowConstants;
 
 /**
@@ -31,6 +35,24 @@ public class JLIst1 {
         JScrollPane scrollPane=new JScrollPane();
         JList list=new JList(new String[]{"a", "b", "c", "a", "b", "c", "a", "b", "c", "a", "b", "c", "a", "b", "c"});
         scrollPane.getViewport().add(list);
+        list.setCellRenderer(new ListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel bt = new JLabel();
+                if(value instanceof String){
+                    bt.setText(""+value);
+                }else if(value instanceof Integer){
+                    bt.setText(""+value);
+                }else{
+                    bt.setText(""+value.hashCode());
+                }
+                if(isSelected){
+                    bt.setOpaque(true);
+                    bt.setBackground(Color.red);
+                }
+                return bt;
+            }        
+        });
         //////////////////////////////////////////
         frame.add(scrollPane);
         
